@@ -13,6 +13,7 @@ public class PlayerListener implements Listener {
     public PlayerListener(BungeeIRC plugin) {
         this.plugin = plugin;
     }
+
     @EventHandler
     public void onLogin(PostLoginEvent event) {
         plugin.getLogger().info("New client for Bungee");
