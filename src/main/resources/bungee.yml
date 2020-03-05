@@ -1,0 +1,4 @@
+name: BungeeIRC
+main: be.nickoos.BungeeIRC.BungeeIRC
+version: ${pom.version}-${build.number}
+author: Nickoos
