@@ -21,8 +21,11 @@ public class PlayerListener implements Listener {
         String Username = event.getPlayer().getName();
         new bot(plugin).New_client(Username);
     }
-    public void onPlayerDisconnect(PlayerDisconnectEvent event) {
-
+    @EventHandler
+    public void onLeave(PlayerDisconnectEvent event) {
+        plugin.getLogger().info("Lost client from Bungee");
+        String Username = event.getPlayer().getName();
+        new bot(plugin).Drop_client(Username);
     }
 
 }

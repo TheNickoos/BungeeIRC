@@ -11,9 +11,9 @@ import java.util.logging.Level;
 public class bot implements Runnable{
     BungeeIRC plugin;
 
-    Socket socket = null;
-    PrintWriter out;
-    BufferedReader in = null;
+    public static Socket socket = null;
+    public static PrintWriter out;
+    public static BufferedReader in = null;
     Thread thread = new Thread(this);
 
     public void New_client(String nick) {
@@ -23,7 +23,8 @@ public class bot implements Runnable{
         out.println(":" + plugin.getConfig().getString("link") + " NICK " + nick + " 1 " + ut2 + " " + nick + " " + ip + " " + plugin.getConfig().getString("link") + " :" + plugin.getConfig().getString("description"));
         out.println(":" + nick + " JOIN "+ plugin.getConfig().getString("channel"));
     }
-    public void Drop_client(String nick, String ip) {
+    public void Drop_client(String nick) {
+        plugin.getLogger().info("Lost client from irc : " +nick);
         out.println(":" + nick + " QUIT");
     }
 
