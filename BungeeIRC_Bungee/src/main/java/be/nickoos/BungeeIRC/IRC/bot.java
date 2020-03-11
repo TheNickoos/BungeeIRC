@@ -28,6 +28,10 @@ public class bot implements Runnable{
         out.println(":" + nick + " QUIT");
     }
 
+    public void Message_Client(String nick, String message) {
+        plugin.getLogger().info("Nouveau message pour irc : " +nick);
+        out.println(":" + nick + " PRIVMSG #test :" +message);
+    }
     public bot(BungeeIRC plugin) {
         this.plugin = plugin;
 

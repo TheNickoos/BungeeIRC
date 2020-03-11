@@ -1,5 +1,4 @@
 package be.nickoos.BungeeIRC;
-
 import be.nickoos.BungeeIRC.IRC.bot;
 
 import com.google.common.io.ByteStreams;
@@ -14,19 +13,11 @@ import java.io.*;
 import java.util.logging.Level;
 
 public class BungeeIRC extends Plugin implements Listener {
+
     private Configuration configuration;
 
-    @Override
-    public void onEnable() {
-        getLogger().info("We're gonna take over the world of IRC !");
-        getLogger().info("Loading configuration ...");
-        loadConfig();
-        new bot(this).connect_irc();
-        getProxy().getPluginManager().registerListener(this, new PlayerListener(this));
-
-    }
     public Configuration getConfig() {
-        return this.configuration;
+        return configuration;
     }
     public void reloadConfig(String paramString) throws IOException {
         try {
@@ -64,4 +55,21 @@ public class BungeeIRC extends Plugin implements Listener {
         return resourceFile;
     }
 
+    @Override
+    public void onEnable() {
+        getLogger().info("We're gonna take over the world of IRC !");
+        getProxy().registerChannel( "bungeeirc:core" );
+        loadConfig();
+        new bot(this).connect_irc();
+        getProxy().getPluginManager().registerListener(this, new PlayerListener(this));
+        getProxy().getPluginManager().registerListener(this, new PluginMessageReceiver(this));
+
+    }
+
+    @Override
+    public void onDisable()
+    {
+        configuration = null;
+        getLogger().info( "Plugin disabled!" );
+    }
 }
