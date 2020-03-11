@@ -15,14 +15,14 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onLogin(PostLoginEvent event) {
-        plugin.getLogger().info("New client for Bungee");
+        // This is the event when a new player join the game
         String IP = event.getPlayer().getAddress().getAddress().getHostAddress();
         String Username = event.getPlayer().getName();
-        new bot(plugin).New_client(Username);
+        new bot(plugin).New_client(Username, IP);
     }
     @EventHandler
     public void onLeave(PlayerDisconnectEvent event) {
-        plugin.getLogger().info("Lost client from Bungee");
+        // This is the event when a player leave the game
         String Username = event.getPlayer().getName();
         new bot(plugin).Drop_client(Username);
     }

@@ -19,10 +19,13 @@ link: "test.vanilla-minecraft.fr"
 description: "Im an happy bridge between Minecraft and IRC"
 
 # The channel where the users will appear when they are in game
-channel: "#test"
+channel: "#game"
+
+# The channel where the log will appear
+servicechannel: "#service"
 
 # The main bot name, It's like the "operserv" from Anope.
-botnick: "VanillaMinecraftlol"
+botnick: "VanillaMinecraft"
 
 # Put true if you want to debug IRC
 irc-debug: true

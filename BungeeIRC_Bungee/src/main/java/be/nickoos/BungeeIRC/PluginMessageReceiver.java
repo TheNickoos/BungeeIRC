@@ -9,8 +9,6 @@ import net.md_5.bungee.api.event.PluginMessageEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
-import java.util.logging.Level;
-
 public class PluginMessageReceiver implements Listener {
     private BungeeIRC plugin;
 
@@ -19,25 +17,27 @@ public class PluginMessageReceiver implements Listener {
     }
 
     @EventHandler
-    public void on(PluginMessageEvent event)
-    {
+    public void on(PluginMessageEvent event) {
 
-
-        if ( !event.getTag().equalsIgnoreCase("bungeeirc:core")) return;
+        // We only read on channel "bungeeirc:core"
+        if (!event.getTag().equalsIgnoreCase("bungeeirc:core")) return;
 
         ByteArrayDataInput in = ByteStreams.newDataInput( event.getData() );
         String subChannel = in.readUTF();
         String message = in.readUTF();
-        if ( subChannel.equalsIgnoreCase( "message" ) )
-        {
 
-            if ( event.getReceiver() instanceof ProxiedPlayer) {
+        // This happen when the subchannel = message
+        if (subChannel.equalsIgnoreCase("message")) {
+
+            // If the sender of the message is a player
+            if (event.getReceiver() instanceof ProxiedPlayer) {
                 ProxiedPlayer receiver = (ProxiedPlayer) event.getReceiver();
                 new bot(plugin).Message_Client(receiver.toString(), message);
-
             }
-            if ( event.getReceiver() instanceof Server)
-            {
+
+            // Need testing
+            // If the sender of the message is the server
+            if (event.getReceiver() instanceof Server) {
                 Server receiver = (Server) event.getReceiver();
                 // do things
             }

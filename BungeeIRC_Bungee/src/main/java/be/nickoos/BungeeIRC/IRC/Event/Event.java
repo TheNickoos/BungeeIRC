@@ -27,13 +27,14 @@ public class Event {
                 break;
         }
         switch (temp[1]) {
+            // When a player is kicked from IRC, he will be also kicked from the game.
             case "KICK":
                 String nick[] = temp[0].split(":");
                 String temp2[] = line.trim().split(" ");
-                String kicker = nick[1];
-                String chan = temp2[2];
-                String victim = temp2[3];
-                //plugin.getLogger().info("User "+ victim +" kicked by " + kicker + " from " + chan);
+                String kicker = nick[1]; // The guy who kicked the bad guy
+                String chan = temp2[2]; // The channel when it happen
+                String victim = temp2[3]; // This is the kicked
+
                 ProxiedPlayer Player = ProxyServer.getInstance().getPlayer(victim);
                 Player.disconnect(new TextComponent("kicked"));
         }
